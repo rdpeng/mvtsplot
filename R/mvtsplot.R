@@ -222,7 +222,7 @@ checkMatrix <- function(x) {
 ## "black".  If one or more missing values is between two points, then
 ## the line is drawn grey (or 'NAcol').
 
-nalines <- function(x, y, NAcol = gray(0.6), lattice = FALSE, ...) {
+nalines <- function(x, y, NAcol = gray(0.6), ...) {
         use <- complete.cases(x, y)
         idx <- which(use)
         n <- length(idx)
@@ -236,10 +236,7 @@ nalines <- function(x, y, NAcol = gray(0.6), lattice = FALSE, ...) {
                         NAcol
                 else
                         "black"
-                if(lattice)
-                        llines(c(x[j], x[k]), c(y[j], y[k]), col = col)
-                else
-                        lines(c(x[j], x[k]), c(y[j], y[k]), col = col)
+                lines(c(x[j], x[k]), c(y[j], y[k]), col = col)
         }
         invisible()
 }
