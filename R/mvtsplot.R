@@ -20,7 +20,7 @@
 ## library(splines)
 
 
-drawImage <- function(cx, pal, nlevels, xlim, cn, xtime, group, gcol) {
+drawImage <- function(cx, pal, nlevels, xlim, xtime, group, gcol) {
         par(las = 1, cex.axis = 0.6)
         cn <- colnames(cx)
         nc <- ncol(cx)
@@ -46,7 +46,7 @@ drawImage <- function(cx, pal, nlevels, xlim, cn, xtime, group, gcol) {
         }
 }
 
-drawImageMargin <- function(cx, pal, nlevels, xlim, cn, xtime, group,
+drawImageMargin <- function(cx, pal, nlevels, xlim, xtime, group,
                             gcol, smooth.df, rowm, nr, bottom.ylim, colm, right.xlim,
                             main) {
         op <- par(no.readonly = TRUE)
@@ -311,10 +311,10 @@ mvtsplot <- function(x, group = NULL, xtime = NULL,
         else
                 length(levels)
         if(margin)
-                drawImageMargin(cx, pal, nlevels, xlim, cn, xtime,
+                drawImageMargin(cx, pal, nlevels, xlim, xtime,
                                 group, gcol, smooth.df, rowm, nrow(x),
                                 bottom.ylim, colm, right.xlim, main)
         else
-                drawImage(cx, pal, nlevels, xlim, cn, xtime, group, gcol)
+                drawImage(cx, pal, nlevels, xlim, xtime, group, gcol)
 }
 
