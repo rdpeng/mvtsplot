@@ -7,3 +7,4 @@ Author:  Roger D. Peng <rpeng@jhsph.edu>
 Maintainer:  Roger D. Peng <rpeng@jhsph.edu>
 Description:  A function for plotting multivariate time series data
 License:  GPL (>= 2)
+URL: http://github.com/rdpeng/mvtsplot
