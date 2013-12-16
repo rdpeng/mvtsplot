@@ -1,3 +1,4 @@
 export("mvtsplot")
 importFrom(graphics, "Axis")
 import(splines)
+import(RColorBrewer)
