@@ -260,8 +260,6 @@ mvtsplot <- function(x, group = NULL, xtime = NULL,
                 sort <- match.fun(sort)
         rowstat <- match.fun(rowstat)
 
-        if(!require(RColorBrewer))
-                stop("'RColorBrewer' package required")
         if(is.null(xtime)) {
                 xtime <- seq_len(nrow(x))
                 xlim <- c(0, max(xtime))
