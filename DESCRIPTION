@@ -1,6 +1,5 @@
 Package:  mvtsplot
-Version:  1.0-3
-Date:  2016-05-13
+Version:  1.0-4
 Depends:  R (>= 3.0.0)
 Imports: splines, graphics, grDevices, stats, RColorBrewer
 Title:  Multivariate Time Series Plot
