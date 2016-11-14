@@ -302,7 +302,12 @@ mvtsplot <- function(x, group = NULL, xtime = NULL,
                 if(margin)
                         colm <- colm[, !empty]
         }
-        pal <- colorRampPalette(brewer.pal(4, palette))
+        if(length(palette)==1) 
+          # an RColorBrewer palette
+          pal <- colorRampPalette(brewer.pal(4, palette))
+        else
+          # a generic brewer.pal object (vector of colors)
+          pal <- colorRampPalette(palette)
 
         nlevels <- if(length(levels) == 1)
                 levels
