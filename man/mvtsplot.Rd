@@ -49,6 +49,13 @@ mvtsplot(x, group = NULL, xtime = NULL, norm = c("internal", "global"),
   1--17.
 }
 \author{Roger D. Peng \email{rpeng@jhsph.edu}}
+
+\examples{
+x <- matrix(rnorm(2000), 100, 20)
+mvtsplot(x)
+}
+
+
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{graphics}
