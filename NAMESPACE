@@ -5,6 +5,6 @@ importFrom("grDevices", "colorRampPalette", "gray")
 importFrom("graphics", "abline", "axis", "box", "image", "layout",
            "lines", "par", "plot", "points", "segments", "strwidth",
            "text", "Axis")
-importFrom("stats", "complete.cases", "lm", "na.exclude", "predict",
-           "quantile")
+importFrom("stats", "complete.cases", "na.exclude", "predict",
+           "quantile", "lm")
 
