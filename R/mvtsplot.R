@@ -17,9 +17,7 @@
 ## 02110-1301, USA
 ################################################################################
 
-## library(splines)
-
-
+#' @importFrom graphics abline axis box image layout lines par plot points segments strwidth text Axis
 drawImage <- function(cx, pal, nlevels, xlim, xtime, group, gcol) {
         par(las = 1, cex.axis = 0.6)
         cn <- colnames(cx)
@@ -146,7 +144,8 @@ catcols <- function(x, levels, norm) {
 }
 
 ## Discretize a vector 'x' into categories defined by 'levels'.
-
+#
+#' @importFrom stats quantile
 categorize <- function(x, levels, jitter = TRUE) {
         ## 'x' is a vector; 'levels' is a single integer, or a vector
         ## of quantiles
@@ -182,11 +181,15 @@ reorderCols <- function(x, group) {
         x[, idx.reordered, drop = FALSE]
 }
 
+
+#' @importFrom stats complete.cases
 rangeby <- function(x, f) {
         use <- complete.cases(x, f)
         range(x[use])
 }
 
+#' @importFrom stats predict lm na.exclude
+#' @importFrom splines ns
 splineFillIn <- function(x, df) {
         if(all(is.na(x)))
                 return(x)
@@ -241,7 +244,37 @@ nalines <- function(x, y, NAcol = gray(0.6), ...) {
         invisible()
 }
 
-
+#' A function for plotting multivariate time series data
+#' 
+#' A function for plotting multivariate time series data
+#' 
+#' @param x a matrix of N rows and P columns, where P is the number of time series and N is the number of observations per series
+#' @param group a length N vector indicating group membership of each row of the matrix (optional)
+#' @param xtime a length N vector containing the time index (optional)
+#' @param norm normalization technique (see Details)
+#' @param levels number of levels for mapping categories into colors
+#' @param smooth.df the number of degrees of freedom to be used for the spline smoother
+#' @param margin should the margin plots be shown (default = TRUE)
+#' @param  sort a function computing a numerical statistic that can be used for ordering the rows (default is no sorting)
+#' @param main title for the plot
+#' @param palette name of the Color Brewer palette to be used
+#' @param rowstat a function computing a numerical statistic on the rows for displaying on the margin (default is \code{median})
+#' @param xlim limits for the x-axis
+#' @param bottom.ylim y-axis limits for the bottom margin
+#' @param right.xlim x-axis limits for the right margin
+#' @param gcol color for lines separating groups
+#' 
+#' @details For the normalization, specifying "internal" means that each time series is categorized into colors based on the range of values in each time series individually. Therefore, under this scenario, the same color in two different time series will have two different meanings. If "global" is specified, then each time series will be categorized based on the range of values for the entire collection of time series. In this case, the colors are comparable across series.
+#'
+#' @importFrom RColorBrewer brewer.pal
+#' @importFrom grDevices colorRampPalette gray
+#' @references Peng RD (2008). "A method for visualizing multivariate time series data," Journal of Statistical Software, 25 (Code Snippet), 1--17.
+#' @author Roger D. Peng \email{rpeng@jhsph.edu}
+#' @examples 
+#' x <- matrix(rnorm(2000), 100, 20)
+#' mvtsplot(x)
+#' 
+#' @export
 mvtsplot <- function(x, group = NULL, xtime = NULL,
                      norm = c("internal", "global"), levels = 3,
                      smooth.df = NULL, margin = TRUE,
