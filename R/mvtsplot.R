@@ -19,7 +19,7 @@
 
 ## library(splines)
 
-
+#' @importFrom graphics Axis image par axis box abline
 drawImage <- function(cx, pal, nlevels, xlim, xtime, group, gcol) {
         par(las = 1, cex.axis = 0.6)
         cn <- colnames(cx)
@@ -46,6 +46,7 @@ drawImage <- function(cx, pal, nlevels, xlim, xtime, group, gcol) {
         }
 }
 
+#' @importFrom stats lm
 drawImageMargin <- function(cx, pal, nlevels, xlim, xtime, group,
                             gcol, smooth.df, rowm, nr, bottom.ylim, colm, right.xlim,
                             main) {
@@ -241,7 +242,57 @@ nalines <- function(x, y, NAcol = gray(0.6), ...) {
         invisible()
 }
 
-#' mvtsplot
+#' Plot Multivariate Time Series Data
+#'
+#' @description
+#' A function for plotting multivariate time series data
+#'
+#' @param x a matrix of N rows and P columns, where P is the number of time series and N is the number of observations per series
+#' @param group a length N vector indicating group membership of each row of the matrix (optional)
+#' @param xtime a length N vector containing the time index (optional)
+#' @param norm normalization technique (see Details)
+#' @param levels number of levels for mapping categories into colors
+#' @param smooth.df the number of degrees of freedom to be used for the spline smoother
+#' @param margin should the margin plots be shown (default = TRUE)
+#' @param sort a function computing a numerical statistic that can be used for ordering the rows (default is no sorting)
+#' @param main title for the plot
+#' @param palette name of the Color Brewer palette to be used
+#' @param rowstat a function computing a numerical statistic on the rows for displaying on the margin (default is \code{median})
+#' @param xlim limits for the x-axis
+#' @param bottom.ylim y-axis limits for the bottom margin
+#' @param right.xlim x-axis limits for the right margin
+#' @param gcol color for lines separating groups
+#'
+#' @details
+#' For the normalization, specifying "internal" means that each time series is categorized into colors based on the range of values in each time series individually. Therefore, under this scenario, the same color in two different time series will have two different meanings. If "global" is specified, then each time series will be categorized based on the range of values for the entire collection of time series. In this case, the colors are comparable across series.
+#'
+#' @references   Peng RD (2008). "A method for visualizing multivariate time series data," Journal of Statistical Software, 25 (Code Snippet), 1--17.
+#' @keywords graphics
+#' @import splines RColorBrewer
+#' @importFrom grDevices colorRampPalette gray
+#' @importFrom  graphics abline axis box image layout lines par plot points segments strwidth text
+#' @importFrom stats complete.cases na.exclude predict quantile
+#'
+#' @export
+#' @examples
+#' library(mvtsplot)
+#'
+#' set.seed(971)
+#' x1 <- matrix(-0.005 * (1:200) + rnorm(200 * 10), 200, 10)
+#' x2 <- matrix(-0.005 * (1:200) + rnorm(200 * 10, mean = 2, sd = 2), 200, 10)
+#' x <- cbind(x1, x2)
+#' colnames(x) <- paste("X", 1:ncol(x))
+#' g <- gl(2, 10)
+#'
+#' ## Internal normalization
+#' mvtsplot(x, margin = FALSE, norm = "internal", group = g)
+#'
+#' ## Global normalization
+#' mvtsplot(x, margin = FALSE, norm = "global", group = g)
+#'
+#' ## Use margin plots
+#' mvtsplot(x, group = g, levels = 7)
+#'
 #'
 #'
 mvtsplot <- function(x, group = NULL, xtime = NULL,
