@@ -17,8 +17,6 @@
 ## 02110-1301, USA
 ################################################################################
 
-## library(splines)
-
 #' @importFrom graphics Axis image par axis box abline
 drawImage <- function(cx, pal, nlevels, xlim, xtime, group, gcol) {
         par(las = 1, cex.axis = 0.6)
